@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>valpr.github.io</title>
+  <meta name="description" content="Personal base page for valpr on GitHub Pages.">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --card-border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #38bdf8;
+      --primary-hover: #0ea5e9;
+      --primary-text: #0f172a;
+      --secondary-bg: #334155;
+      --secondary-hover: #475569;
+      --secondary-text: #f8fafc;
+      --accent-glow: rgba(56, 189, 248, 0.15);
+      --highlight: #3b82f6;
+      --success: #34d399;
+      --radius: 14px;
+      --transition: all 0.2s ease;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --card-bg: #ffffff;
+        --card-border: #e2e8f0;
+        --text: #0f172a;
+        --text-muted: #64748b;
+        --primary: #0284c7;
+        --primary-hover: #0369a1;
+        --primary-text: #ffffff;
+        --secondary-bg: #f1f5f9;
+        --secondary-hover: #e2e8f0;
+        --secondary-text: #1e293b;
+        --accent-glow: rgba(2, 132, 199, 0.08);
+        --highlight: #2563eb;
+        --success: #059669;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.25rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 620px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    /* Header / Hero */
+    .header {
+      text-align: center;
+      padding: 1rem 0;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .badge .wave {
+      animation: wave-animation 2.2s infinite;
+      transform-origin: 70% 70%;
+      display: inline-block;
+    }
+
+    @keyframes wave-animation {
+      0% { transform: rotate(0deg); }
+      10% { transform: rotate(14deg); }
+      20% { transform: rotate(-8deg); }
+      30% { transform: rotate(14deg); }
+      40% { transform: rotate(-4deg); }
+      50% { transform: rotate(10deg); }
+      60% { transform: rotate(0deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.6rem;
+      background: linear-gradient(135deg, var(--text) 30%, var(--primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    /* Card Component */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: var(--transition);
+    }
+
+    /* Redirect Card Highlight */
+    .redirect-card {
+      position: relative;
+      border-color: var(--primary);
+      box-shadow: 0 0 24px var(--accent-glow);
+      overflow: hidden;
+    }
+
+    .redirect-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .redirect-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .timer-badge {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary);
+      background: var(--accent-glow);
+      border: 1px solid var(--primary);
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .redirect-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.25rem;
+    }
+
+    /* Progress bar */
+    .progress-bar-container {
+      width: 100%;
+      height: 4px;
+      background: var(--secondary-bg);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 1.25rem;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--highlight), var(--primary));
+      width: 100%;
+      transform-origin: left;
+      transition: width 0.1s linear;
+    }
+
+    /* Buttons */
+    .btn-group {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.2rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: var(--primary-text);
+      flex: 1 1 200px;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: var(--secondary-bg);
+      color: var(--secondary-text);
+      border-color: var(--card-border);
+      flex: 0 1 auto;
+    }
+
+    .btn-secondary:hover {
+      background: var(--secondary-hover);
+      color: var(--text);
+    }
+
+    .cancelled-notice {
+      display: none;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--success);
+      font-weight: 500;
+      margin-top: 0.75rem;
+    }
+
+    /* Project Info Card */
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .project-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .project-tag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--primary);
+    }
+
+    .project-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .project-details {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.25rem;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      background: var(--secondary-bg);
+      color: var(--text-muted);
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.5rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--card-border);
+    }
+
+    .project-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .project-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Links / Profile */
+    .profile-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .profile-info {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--secondary-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      border: 1px solid var(--card-border);
+    }
+
+    .profile-name {
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .profile-sub {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      padding-top: 0.5rem;
+    }
+
+    footer a {
+      color: inherit;
+      text-decoration: underline;
+    }
+
+    footer a:hover {
+      color: var(--text);
+    }
+
+    svg.icon {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Hero / Greeting -->
+    <header class="header">
+      <div class="badge">
+        <span class="wave">👋</span>
+        <span>Hello there!</span>
+      </div>
+      <h1>You've stumbled on the base page.</h1>
+      <p class="subtitle">This is the root page for <strong>valpr.github.io</strong>.</p>
+    </header>
+
+    <!-- Redirect Section -->
+    <section class="card redirect-card" id="redirectSection">
+      <div class="redirect-header">
+        <div class="redirect-title">
+          <span>🚀</span>
+          <span>Looking for Custom E-Reader?</span>
+        </div>
+        <div class="timer-badge" id="timerBadge">Redirecting in 5s</div>
+      </div>
+      <p class="redirect-desc" id="redirectDesc">
+        Here's a redirect to the <strong>Custom E-Reader</strong> web application. You'll be forwarded automatically shortly, or click below to proceed directly.
+      </p>
+
+      <div class="progress-bar-container" id="progressBarContainer">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+
+      <div class="btn-group">
+        <a href="/custom-ereader/" class="btn btn-primary" id="goNowBtn">
+          <span>Go to Custom E-Reader</span>
+          <span>➔</span>
+        </a>
+        <button type="button" class="btn btn-secondary" id="cancelBtn">
+          <span>Stay here</span>
+        </button>
+      </div>
+
+      <div class="cancelled-notice" id="cancelledNotice">
+        <span>✓</span>
+        <span>Auto-redirect cancelled. Take your time exploring!</span>
+      </div>
+    </section>
+
+    <!-- Project Card -->
+    <section class="card project-card">
+      <div class="project-header">
+        <div class="project-title">📖 Custom E-Reader</div>
+        <div class="project-tag">Featured Project</div>
+      </div>
+      <p class="project-details">
+        A customized, browser-based e-book reader optimized for Japanese language reading, EPUBs, and popup dictionary extensions (Yomitan, etc.). Built on Svelte 5 with full offline support and syncing.
+      </p>
+      <div class="tags">
+        <span class="tag">Svelte 5</span>
+        <span class="tag">EPUB Reader</span>
+        <span class="tag">Japanese Immersion</span>
+        <span class="tag">Offline Capable</span>
+      </div>
+      <div class="project-links">
+        <a href="/custom-ereader/" class="project-link">
+          <span>Open Live Reader</span>
+          <span>➔</span>
+        </a>
+        <a href="https://github.com/valpr/custom-ereader" target="_blank" rel="noopener noreferrer" class="project-link">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span>GitHub Repository</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Profile Card -->
+    <section class="card profile-card">
+      <div class="profile-info">
+        <div class="avatar">👨‍💻</div>
+        <div>
+          <div class="profile-name">valpr</div>
+          <div class="profile-sub">GitHub Portfolio & Projects</div>
+        </div>
+      </div>
+      <a href="https://github.com/valpr" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        <span>GitHub</span>
+      </a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>Hosted on <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a> &bull; <a href="https://github.com/valpr/valpr.github.io" target="_blank" rel="noopener noreferrer">valpr.github.io</a></p>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      var TARGET_URL = "/custom-ereader/";
+      var DURATION_MS = 5000;
+      var remainingMs = DURATION_MS;
+      var intervalMs = 50;
+      var isCancelled = false;
+
+      var timerBadge = document.getElementById("timerBadge");
+      var progressBar = document.getElementById("progressBar");
+      var cancelBtn = document.getElementById("cancelBtn");
+      var cancelledNotice = document.getElementById("cancelledNotice");
+      var progressBarContainer = document.getElementById("progressBarContainer");
+
+      function updateDisplay() {
+        var secondsLeft = Math.ceil(remainingMs / 1000);
+        timerBadge.textContent = "Redirecting in " + secondsLeft + "s";
+        var progressPercent = (remainingMs / DURATION_MS) * 100;
+        progressBar.style.width = progressPercent + "%";
+      }
+
+      var timer = setInterval(function () {
+        if (isCancelled) {
+          clearInterval(timer);
+          return;
+        }
+
+        remainingMs -= intervalMs;
+
+        if (remainingMs <= 0) {
+          clearInterval(timer);
+          progressBar.style.width = "0%";
+          timerBadge.textContent = "Redirecting now...";
+          window.location.href = TARGET_URL;
+        } else {
+          updateDisplay();
+        }
+      }, intervalMs);
+
+      cancelBtn.addEventListener("click", function () {
+        if (isCancelled) return;
+        isCancelled = true;
+        clearInterval(timer);
+        progressBarContainer.style.display = "none";
+        timerBadge.style.display = "none";
+        cancelBtn.style.display = "none";
+        cancelledNotice.style.display = "inline-flex";
+      });
+    })();
+  </script>
+</body>
+</html>
